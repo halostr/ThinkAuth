@@ -1,0 +1,73 @@
+<aside class="main-sidebar">
+
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+
+          <!-- Sidebar user panel (optional) -->
+          <div class="user-panel">
+            <div class="pull-left image">
+              <img src="__PUBLIC__/AdminLTE/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+            </div>
+            <div class="pull-left info">
+              <p>{:session('title')}</p>
+              <!-- Status -->
+              <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+            </div>
+          </div>
+
+          <!-- search form (Optional) -->
+          <form action="#" method="get" class="sidebar-form">
+            <div class="input-group">
+              <input type="text" name="q" class="form-control" placeholder="Search...">
+              <span class="input-group-btn">
+                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
+              </span>
+            </div>
+          </form>
+          <!-- /.search form -->
+
+          <!-- Sidebar Menu -->
+  <ul class="sidebar-menu"> 
+   <li class="header">{$nowModule}</li> 
+   <foreach name="column" item="vo" key="keys">
+     <if condition = "$vo['name'] eq '首页' ">
+       <li class="" id="parent0">
+        <a href="{:U("Index/index")}"><i class="fa fa-dashboard"></i> <span>{$vo.name}</span></a>
+       </li>
+       <if condition="'Index' eq $nowModule">
+            <script type="text/javascript">
+            $(function(){
+              $("#parent0").addClass("active")
+            });
+           </script>
+        </if>
+     <else/>
+        <if condition="$vo['auth']">
+          <li class="treeview" id="parent{$keys}"> 
+            <a href="#"><i class="fa fa-gears"></i> <span>{$vo.name}</span> <i class="fa fa-angle-left pull-right"></i></a> 
+            <ul class="treeview-menu">
+             <foreach name="vo['child']" item="voChild">
+               <if condition="$voChild['auth']">
+                <li>
+                 <a href="{$voChild.url}"><i class='fa fa-circle-o text-yellow'></i><span>{$voChild.name}</span></a>
+                </li> 
+                <if condition="$voChild['c'] eq $nowModule">
+                    <script type="text/javascript">
+                    $(function(){
+                      $("#parent"+{$keys}).addClass("active")
+                    });
+                   </script>
+                </if>
+               </if>
+             </foreach>
+            </ul>
+          </li>
+        </if>
+     </if>
+    
+   </foreach>
+  </ul>
+<!-- /.sidebar-menu -->
+  </section>
+  <!-- /.sidebar -->
+</aside>

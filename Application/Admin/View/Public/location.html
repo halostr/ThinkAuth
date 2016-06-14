@@ -1,0 +1,12 @@
+<ol class="breadcrumb">
+	<foreach name="location" item="vo" key="key">
+
+		<if condition="$key eq 0">
+			<li>
+				<a href="#"><i class="fa fa-dashboard"></i> {$vo.name}</a>
+			</li>
+		<else/>
+			<li class="active">{$vo.name}</li>
+		</if>
+	</foreach>
+</ol>
